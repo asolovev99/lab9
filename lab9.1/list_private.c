@@ -67,12 +67,19 @@ void* get(List* list, int index) // 0 - начальный индекс
 	}
 	else
 	{
-		for (int i = 0; i < index; i++)
+		for (int i = 0; (i < index) && (list != NULL); i++)
 		{
 			list = list->next_element;
 		}
 
-		return list->data;
+		if (list == NULL)
+		{
+			return NULL;
+		}
+		else
+		{
+			return list->data;
+		}
 	}
 }
 void remove(List* list, int index)
