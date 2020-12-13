@@ -4,6 +4,9 @@ typedef struct List List;
 
 typedef struct ListIterator ListIterator;
 
+void create(List** pointer_list, void* data);
+List* create_return(void* data);
+
 void add(List* list, void* data);
 void add_to_end(List* list, void* data);
 void* get(List* list, int index);

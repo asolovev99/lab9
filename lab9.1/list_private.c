@@ -13,40 +13,49 @@ struct ListIterator
 	List* current_list_element;
 };
 
+List* create_return(void* data)
+{
+	List* result = (List*)malloc(sizeof(List));
+	result->data = data;
+	result->next_element = NULL;
+}
+
+void create(List** pointer_list, void* data)
+{
+	if (*pointer_list == NULL)
+	{
+		(*pointer_list) = (List*)malloc(sizeof(List));
+		(*pointer_list)->data = data;
+		(*pointer_list)->next_element = NULL;
+	}
+}
+
 void add(List* list, void* data)
 {
 	List* new_element = NULL;
-	new_element = (List*)malloc(sizeof(List));
-	new_element->data = data;
-	new_element->next_element = list->next_element;
 
-	if (list == NULL)
+	if (list != NULL)
 	{
-		list = new_element;
-	}
-	else
-	{
-		list->next_element = new_element;
+		new_element = (List*)malloc(sizeof(List));
+		new_element->data = data;
+		new_element->next_element = list->next_element;
+		list->next_element = new_element;	
 	}
 }
 void add_to_end(List* list, void* data)
 {
 	List* new_element = NULL;
-	new_element = (List*)malloc(sizeof(List));
-	new_element->data = data;
-	new_element->next_element = NULL;
 
-	if (list == NULL)
-	{
-		list = new_element;
-	}
-	else
+	if (list != NULL)
 	{
 		while (list->next_element != NULL)
 		{
 			list = list->next_element;
 		}
 
+		new_element = (List*)malloc(sizeof(List));
+		new_element->data = data;
+		new_element->next_element = NULL;
 		list->next_element = new_element;
 	}
 }
@@ -78,20 +87,24 @@ void remove(List* list, int index)
 		}
 		else
 		{
-			for (int i = 0; i < index - 1; i++)
+			for (int i = 0; (i < index - 1) && (list->next_element != NULL); i++)
 			{
 				list = list->next_element;
 			}
 
-			removal_element = list->next_element;
-			list->next_element = list->next_element->next_element;
-			free(removal_element);
+			if (list->next_element != NULL)
+			{
+				removal_element = list->next_element;
+				list->next_element = removal_element->next_element;
+				free(removal_element);
+			}
 		}
 	}
 }
 int get_length(List* list)
 {
 	int index = 0;
+
 	if (list == NULL)
 	{
 		return 0;
