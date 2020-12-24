@@ -3,7 +3,7 @@
 
 int main()
 {
-	List* test_list = NULL;
+	/*List* test_list = NULL;
 	ListIterator* test_iterator = NULL;
 
 	int test_data[5];
@@ -36,7 +36,7 @@ int main()
 	remove(test_list, 3);
 	remove(test_list, 2);
 	remove(test_list, 1);
-	remove(test_list, 0);
+	remove(test_list, 0);*/
 
 	return 0;
 }

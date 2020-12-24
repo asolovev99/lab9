@@ -1,6 +1,5 @@
 #include"list.h"
 #include<stdlib.h>
-//#include<stdio.h>
 
 struct List
 {
