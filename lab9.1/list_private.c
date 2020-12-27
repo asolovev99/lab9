@@ -17,6 +17,8 @@ List* create_return(void* data)
 	List* result = (List*)malloc(sizeof(List));
 	result->data = data;
 	result->next_element = NULL;
+
+	return result;
 }
 
 void create(List** pointer_list, void* data)
